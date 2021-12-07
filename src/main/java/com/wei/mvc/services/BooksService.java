@@ -50,14 +50,10 @@ public class BooksService {
 		if (optionalBook.isPresent()) {
 			Book target = optionalBook.get();
 			
-			System.out.println(target);
-			
 			target.setTitle(title);
 			target.setDescription(desc);
 			target.setLanguage(lang);
 			target.setNumberOfPages(numOfPages);
-			
-			System.out.println(target);
 			
 			return bookRepository.save(target);
 			
