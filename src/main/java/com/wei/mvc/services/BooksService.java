@@ -44,24 +44,31 @@ public class BooksService {
 	
 	
 	// UPDATE a book
+	// UPDATE book could be same as create
 	public Book updateBook(Long id, String title, String desc, String lang, int numOfPages) {
+		// get the one book from db by giving id
 		Optional<Book> optionalBook = bookRepository.findById(id);
 		
+		// if found the book
 		if (optionalBook.isPresent()) {
+			// get the book 
 			Book target = optionalBook.get();
 			
+			// reset the book by required data
 			target.setTitle(title);
 			target.setDescription(desc);
 			target.setLanguage(lang);
 			target.setNumberOfPages(numOfPages);
 			
+			// save the new data book
 			return bookRepository.save(target);
 			
 		} else {
-			return null;
+			return this.createBook(new Book(title, desc, lang, numOfPages));
 		}
 	}
 	
+
 	
 	// DELETE a book
 	public void deleteBook(Long id) {
