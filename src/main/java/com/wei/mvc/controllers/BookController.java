@@ -1,6 +1,5 @@
 package com.wei.mvc.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,22 @@ import com.wei.mvc.services.BooksService;
 
 @Controller
 public class BookController {
-
 	
 	@Autowired
 	BooksService booksService;
 	
+	public BookController(BooksService booksService) {
+		this.booksService = booksService;
+	}
+	
+	
+	@GetMapping("/books")
+	public String index(Model model) {
+		List<Book> books = booksService.allBooks();
+
+		model.addAttribute("books", books);
+		return "/index.jsp";
+	}
 	
 	@GetMapping("/books/{bookId}")
 	public String index(
@@ -28,14 +38,10 @@ public class BookController {
 //		System.out.println(bookId);
 		
 		Book book = booksService.findBook(bookId);
-		
-		List<Book> books = booksService.allBooks();
-		
+				
 //		System.out.println(book);
 		model.addAttribute("book", book);
 		
-		model.addAttribute("books", books);
-
 		return "show.jsp";
 	}
 	

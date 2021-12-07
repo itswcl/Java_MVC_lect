@@ -18,17 +18,10 @@
 <body>
 	
 	<div class="container">
-		<h1>TEST</h1>
-			<p><c:out value="${ book.title }" /></p>
+			<h1><c:out value="${ book.title }" /></h1>
 			<p>Description: <c:out value="${ book.description }" /></p>
 			<p>Language: <c:out value="${ book.language }" /></p>
 			<p>Number of pages: <c:out value="${ book.numberOfPages }" /></p>
-<%-- 		<c:forEach var="book" items="${ books }">
-			<p><c:out value="${ book.title }" /></p>
-			<p><c:out value="${ book.description }" /></p>
-			<p><c:out value="${ book.language }" /></p>
-			<p><c:out value="${ book.numberOfPages }" /></p>
-		</c:forEach> --%>
 	</div>
 	
 </body>
