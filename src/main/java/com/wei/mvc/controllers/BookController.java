@@ -21,13 +21,18 @@ public class BookController {
 		this.booksService = booksService;
 	}
 	
+	@GetMapping("/")
+	public String redirectToBooks() {
+		return "redirect:/books";
+	}
 	
 	@GetMapping("/books")
-	public String index(Model model) {
+	public String allBooks(Model model) {
 		List<Book> books = booksService.allBooks();
 
 		model.addAttribute("books", books);
-		return "/index.jsp";
+		// WEB-INF/books/index.jsp path 
+		return "/books/index.jsp";
 	}
 	
 	@GetMapping("/books/{bookId}")

@@ -43,6 +43,7 @@ public class BooksApi {
 		return book;
 	}
 	
+	// udpate methond 1
 	// @PutMapping
     @RequestMapping(value="/api/books/{id}", method=RequestMethod.PUT)
     public Book update(
@@ -51,10 +52,18 @@ public class BooksApi {
     		@RequestParam(value="description") String desc, 
     		@RequestParam(value="language") String lang,
     		@RequestParam(value="pages") Integer numOfPages) {
-        Book book = booksService.updateBook(id, title, desc, lang, numOfPages);
-        return book;
+        Book updatedBook = booksService.updateBook(id, title, desc, lang, numOfPages);
+        return updatedBook;
     }
- 
+	
+//	    Update methond 2
+//    	Book foundBook = booksService.findBook(id);
+//    	
+//    	foundBook.setTitle(title);
+//    	foundBook.setDescription(desc);
+//    	foundBook.setLanguage(lang);
+//    	foundBook.setNumberOfPages(numOfPages);
+//    	return booksService.updateBook(foundBook);
     
     // @DeleteMapping
     @RequestMapping(value="/api/books/{id}", method=RequestMethod.DELETE)
