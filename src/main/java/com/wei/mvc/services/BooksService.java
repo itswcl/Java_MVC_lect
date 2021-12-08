@@ -61,7 +61,7 @@ public class BooksService {
 			
 		} else {
 			
-			return this.createBook(new Book(title, desc, lang, numOfPages));
+			return this.createBook(foundBook);
 		}
 	}
 	
