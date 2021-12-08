@@ -18,7 +18,7 @@
 <body>
 	
 	<div class="container">
-		<h1>All Books</h1>
+		<h1>All Books</h1><span><a href="books/new">Create</a></span>
 		<table class="table">
 			<thead>
 				<tr>

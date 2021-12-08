@@ -2,11 +2,16 @@ package com.wei.mvc.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.wei.mvc.models.Book;
 import com.wei.mvc.services.BooksService;
@@ -39,15 +44,28 @@ public class BookController {
 	public String index(
 			// path variable to link the url id giving
 			@PathVariable("bookId") Long bookId,
-			Model model) {
-//		System.out.println(bookId);
-		
+			Model model) {		
 		Book book = booksService.findBook(bookId);
 				
-//		System.out.println(book);
 		model.addAttribute("book", book);
 		
-		return "show.jsp";
+		return "/books/show.jsp";
 	}
 	
+	@GetMapping("/books/new")
+	public String newBook(@ModelAttribute("book") Book book) {
+		return "/books/new.jsp";
+	}
+	
+	@PostMapping("/books")
+	public String create(
+			@Valid @ModelAttribute("book") Book book,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return "/books/new.jsp";
+		} else {
+			booksService.createBook(book);
+			return "redirect:/books";
+		}
+	}
 }
